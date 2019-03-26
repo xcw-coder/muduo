@@ -39,11 +39,14 @@ class AtomicIntegerT : noncopyable
   T get()
   {
     // in gcc >= 4.7: __atomic_load_n(&value_, __ATOMIC_SEQ_CST)
+    //比较value与第二个参数是否相等，若相等，则将value设置为第三个参数，返回的value修改之前的值
+    //也就是说，写入新值之前，读出旧值
     return __sync_val_compare_and_swap(&value_, 0, 0);
   }
 
   T getAndAdd(T x)
   {
+    //先获取，在加x, 返回的是未家之前的value   *value + x;
     // in gcc >= 4.7: __atomic_fetch_add(&value_, x, __ATOMIC_SEQ_CST)
     return __sync_fetch_and_add(&value_, x);
   }

@@ -16,6 +16,7 @@
 using namespace muduo;
 using namespace muduo::net;
 
+//Reactor + ThreadPool
 class SudokuServer
 {
  public:
